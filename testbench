@@ -1,0 +1,34 @@
+/*Design a finite state machine to model a vending machine that accepts only quarters and gives a container of juice when 75 cents have been deposited, followed by a button being pushed. If a fourth quarter is deposited before the button has been pushed, this quarter is immediately returned. If the button is pushed before three quarters are deposited, nothing will happen. The machine is in state Si (i = 0; 1; 2; 3) when it has been given i quarters towards the next purchase. Inputs to the machine are Q (inserting a quarter) and B (pushing a button). After one request is processed, it is ready for another request.*/
+
+// Code your testbench here
+module tb_ven_mach;
+reg c,clk,rst;
+wire y;
+ven_mach uut(.c(c),.clk(clk),.rst(rst),.y(y));
+always #5 clk=~clk; 
+initial
+begin
+  $dumpfile("d1.vcd");
+  $dumpvars(0,tb_ven_mach);
+end
+initial
+begin
+clk=0;
+rst=1;
+c=0;
+rst=0;
+#5 rst=1;
+@(posedge clk) c=0;
+@(posedge clk) c=0;
+@(posedge clk) c=1;
+@(posedge clk) c=0;
+@(posedge clk) c=0;
+@(posedge clk) c=0;
+@(posedge clk) c=1;  
+#10 $finish;
+end
+endmodule  
+  
+  
+  
+ 
